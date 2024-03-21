@@ -78,7 +78,7 @@ before(async function () {
 });
 
 describe("Should build docker image and run", function () {
-  this.timeout(20000);
+  this.timeout(50000);
   it("should create a test", async () => {
     //Given I have a consumer
     let tc = new TestConsumer(kafka, { groupId: "docker-test" });

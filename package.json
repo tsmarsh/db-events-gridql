@@ -25,6 +25,8 @@
     "mongodb-memory-server": "^8.13.0",
     "openapi-client-axios": "^7.2.0",
     "prettier": "^3.2.5",
-    "testcontainers": "^9.9.1"
+    "testcontainers": "^9.9.1",
+    "axios": "^1.6.8",
+    "js-yaml": "^4.1.0"
   }
 }
