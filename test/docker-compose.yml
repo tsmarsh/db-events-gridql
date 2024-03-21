@@ -83,7 +83,7 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
-    image: tsmarsh/gridql:3.7.0
+    image: tsmarsh/gridql:3.8.1
     ports:
       - "3033:3033"
     volumes:
