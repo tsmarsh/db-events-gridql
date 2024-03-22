@@ -11,23 +11,27 @@
     "start": "node index.js",
     "test": "mocha --exit",
     "format": "prettier --write index.js \"test/**/*.{js,jsx,mjs,ts,tsx,json,css,md}\"",
-    "lint": "eslint index.js \"test/**/*.{js,jsx,mjs,ts,tsx,json,css,md}\""
+    "lint": "eslint index.js \"test/**/*.{js,jsx,mjs}\"",
+    "prepare": "husky"
   },
   "dependencies": {
     "@gridql/mongo-event-builder": "^3.8.3",
     "log4js": "^6.9.1"
   },
   "devDependencies": {
-    "@gridql/payload-generator": "^3.8.2",
-    "eslint": "^8.57.0",
     "@gridql/kafka-consumer": "^3.7.0",
+    "@gridql/payload-generator": "^3.8.2",
+    "@testcontainers/kafka": "^10.7.2",
+    "@testcontainers/mongodb": "^10.7.2",
+    "axios": "^1.6.8",
+    "eslint": "^8.57.0",
+    "husky": "^9.0.11",
+    "js-yaml": "^4.1.0",
     "kafkajs": "^2.2.4",
     "mocha": "^10.2.0",
     "mongodb-memory-server": "^8.13.0",
     "openapi-client-axios": "^7.2.0",
     "prettier": "^3.2.5",
-    "testcontainers": "^9.9.1",
-    "axios": "^1.6.8",
-    "js-yaml": "^4.1.0"
+    "testcontainers": "^10.7.2"
   }
 }

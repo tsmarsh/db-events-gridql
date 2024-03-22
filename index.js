@@ -4,32 +4,29 @@ import fs from "fs";
 
 import Log4js from "log4js";
 
-
 Log4js.configure({
-    appenders: {
-        out: {
-            type: 'stdout'
-        }
+  appenders: {
+    out: {
+      type: "stdout",
     },
-    categories: {
-        default: { appenders: ['out'], level: 'info' }
-    }
+  },
+  categories: {
+    default: { appenders: ["out"], level: "info" },
+  },
 });
 
-const logger = Log4js.getLogger("db-events")
+const logger = Log4js.getLogger("db-events");
 
 let configPath = "./config/config.conf";
 
 if (fs.existsSync(configPath)) {
-  init(configPath)
-    .then((config) => {
-      logger.info(`Configuration found: ${JSON.stringify(config)}`);
+  init(configPath).then((config) => {
+    logger.info(`Configuration found: ${config}`);
 
-      start(config).catch((err) => {
-        logger.error(`Failed to start: ${JSON.stringify(err)}`);
-      });
-    })
-    .catch((err) => logger.error(`Error parsing config: ${JSON.stringify(err)}`));
+    start(config).catch((err) => {
+      logger.error(`Failed to start: ${JSON.stringify(err)}`);
+    });
+  });
 } else {
   logger.error("Config missing");
 }

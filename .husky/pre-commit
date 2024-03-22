@@ -1,0 +1,4 @@
+yarn install
+yarn lint
+yarn format
+yarn test

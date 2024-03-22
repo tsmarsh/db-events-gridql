@@ -10,7 +10,7 @@ services:
       "localhost,mongo"
     ]
     ports:
-      - "27017:27017"
+      - "37017:27017"
     hostname: mongo
     healthcheck:
       test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
@@ -40,41 +40,19 @@ services:
   queue:
     image: confluentinc/cp-kafka:7.4.0
     ports:
-      - "19093:19093"
+      - "29093:29093"
     hostname: queue
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://queue:9093,PLAINTEXT_HOST://localhost:19093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://queue:9093,PLAINTEXT_HOST://localhost:29093
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_DELETE_TOPIC_ENABLE: "true"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - zookeeper
-
-  builder:
-    depends_on:
-      init-replica-set:
-        condition: service_started
-      queue:
-        condition: service_started
-      mongo:
-        condition: service_healthy
-    build:
-      context: ".."
-      dockerfile: "./Dockerfile"
-    hostname: builder
-    ports:
-      - "9229:9229"
-    volumes:
-      - "./config:/app/config"
-    environment:
-      NODE_OPTIONS: --inspect=0.0.0.0:9229
-      MONGO_URI: mongodb://mongo:27017
-      KAFKA_URI: queue:9093
-      KAFKA_HOST: queue
 
   test:
     depends_on: [init-replica-set]

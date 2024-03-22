@@ -1,3 +1,6 @@
+/*
+
+We only need this test to debug the module if the docker test fails. Otherwise its functionally identical to the docker test and robs us of ports.
 import { OpenAPIClientAxios } from "openapi-client-axios";
 
 import { builderFactory } from "@gridql/payload-generator";
@@ -24,6 +27,8 @@ let kafka;
 let swagger_clients = {};
 
 import Log4js from "log4js";
+import { init } from "@gridql/mongo-event-builder/lib/config.js";
+import { start } from "@gridql/mongo-event-builder";
 
 Log4js.configure({
   appenders: {
@@ -39,7 +44,10 @@ Log4js.configure({
 before(async function () {
   this.timeout(200000);
 
-  await new DockerComposeEnvironment(__dirname).up();
+  await new DockerComposeEnvironment(
+    __dirname,
+    __dirname + "/integration.yml",
+  ).up();
 
   for (let restlette of ["test"]) {
     let rest = await fetch(
@@ -56,14 +64,20 @@ before(async function () {
 
   kafka = new Kafka({
     //logLevel: logLevel.INFO,
-    brokers: ["localhost:19093"],
+    brokers: ["localhost:29093"],
     clientId: "db-events-test",
   });
 
-  // await createKafkaTopic("test");
+  process.env.MONGO_URI = "mongodb://localhost:37017";
+  process.env.KAFKA_URI = "localhost:29093";
+  process.env.KAFKA_HOST = "localhost";
+
+  const builders = await init(__dirname + "/config/config.conf");
+  await start(builders);
 });
 
-describe("Should build docker image and run", function () {
+
+describe("Should give us an opportunity to debug the listener", function () {
   this.timeout(50000);
   it("should create a test", async () => {
     //Given I have a consumer
@@ -92,3 +106,4 @@ describe("Should build docker image and run", function () {
     assert.equal(result.data.name, test.name);
   });
 });
+*/
