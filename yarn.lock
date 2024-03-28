@@ -549,10 +549,10 @@
     mongodb "^6.5.0"
     promise-retry "^2.0.1"
 
-"@gridql/mongo-event-builder@^3.8.3":
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/@gridql/mongo-event-builder/-/mongo-event-builder-3.8.3.tgz#53209b3c0af16a98e7c8a3c8335496974d954ca6"
-  integrity sha512-Q2hPm55KctU4Dm//ppV7uG5k80R09zALWSNyFu2oYwOMCLBenuteiUv5bY9vsBcRdXnYYyxWVIok+WMiquMOYQ==
+"@gridql/mongo-event-builder@^3.8.4":
+  version "3.8.4"
+  resolved "https://registry.yarnpkg.com/@gridql/mongo-event-builder/-/mongo-event-builder-3.8.4.tgz#1a34cb9ea11cd2c687c678dd3f3ceaab2e7f2410"
+  integrity sha512-LWtSEV662sUel2ZwVRqvY+dwLZvpcSR1Btskh1o95/uCIw8Wc9ooLUt6rBMBMPFF/u/rgjAZmJCJQxxy5yM26A==
   dependencies:
     "@gridql/mongo-connector" "^3.8.1"
     "@pushcorn/hocon-parser" "^1.2.6"
